@@ -1,0 +1,181 @@
+/* Define theme variables for consistent design */
+:root {
+  --gradient-start: #6A0572;
+  --gradient-end: #FF3066;
+  --font-primary: 'Arvo', cursive;
+  --font-secondary: 'Poppins', sans-serif;
+  --color-white: #FFFFFF;
+  --color-highlight: #DBEDF3;
+  --color-shadow: #DA0463;
+  --color-drum-border: #404B69;
+  --color-hover: #F3F4F6;
+  --color-game-over: rgba(255, 0, 0, 0.8);
+  --color-particle: rgba(255, 255, 255, 0.6);
+}
+
+/* General body styling */
+body {
+  text-align: center;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  color: var(--color-white);
+  font-family: var(--font-secondary);
+  transition: background 0.5s ease;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header title styling */
+.drum_kit {
+  font-size: 5rem;
+  color: var(--color-highlight);
+  font-family: var(--font-primary);
+  text-shadow: 3px 0 var(--color-shadow), 0 3px var(--color-shadow);
+  margin: 1rem 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.drum_kit:hover {
+  color: var(--color-shadow);
+  text-shadow: 0 0 10px var(--color-highlight), 0 0 20px var(--color-shadow);
+}
+
+/* Subheading or enjoy text styling */
+.enjoy {
+  font-size: 2rem;
+  color: var(--color-highlight);
+  font-family: var(--font-primary);
+  text-shadow: 3px 0 var(--color-shadow);
+  margin-bottom: 2rem;
+}
+
+/* Drum container */
+.set {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 2rem auto;
+}
+
+/* Individual drum buttons */
+.drum {
+  outline: none;
+  border: 10px solid var(--color-drum-border);
+  font-size: 3rem;
+  font-family: var(--font-primary);
+  font-weight: 900;
+  color: var(--color-shadow);
+  text-shadow: 3px 0 var(--color-highlight), 0 3px var(--color-highlight);
+  border-radius: 15px;
+  background-color: var(--color-white);
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  line-height: 150px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.drum:hover {
+  background-color: var(--color-hover);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--color-shadow), 0 0 30px var(--color-shadow);
+}
+
+.drum:active {
+  transform: scale(0.95);
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.drum:active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--color-shadow);
+  border-radius: 50%;
+  animation: pulse 0.5s ease-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Background images for drums */
+.w, .a, .s, .d, .j, .k, .l {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.w { background-image: url(./images/tom1.png); }
+.a { background-image: url(./images/tom2.png); }
+.s { background-image: url(./images/tom3.png); }
+.d { background-image: url(./images/tom4.png); }
+.j { background-image: url(./images/snare.png); }
+.k { background-image: url(./images/crash.png); }
+.l { background-image: url(./images/kick.png); }
+
+/* Game Over State */
+.game-over {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-game-over);
+  color: var(--color-white);
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .drum {
+    font-size: 2rem;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+  }
+
+  .set {
+    gap: 10px;
+  }
+
+  .drum_kit {
+    font-size: 3rem;
+  }
+
+  .enjoy {
+    font-size: 1.5rem;
+  }
+}
+
+.pressed {
+  box-shadow: inset 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 15px #DBEDF3;
+  transform: scale(0.9); 
+  opacity: 0.8; 
+  transition: all 0.2s ease; 
+}
